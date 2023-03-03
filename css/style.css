@@ -1,0 +1,115 @@
+/* * {
+  box-sizing: border-box;
+}
+
+*::after,
+*::before {
+  box-sizing: inherit;
+}
+
+#modal {
+  display: none;
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(255, 2, 2, 0.836);
+}
+#modal-content {
+  background-color: white;
+  margin: 15% auto;
+  padding: 20px;
+  border: 1px solid black;
+  width: 50%;
+  max-width: 600px;
+}
+
+.modal-open {
+  display: block !important;
+}
+
+.car_card {
+  background-color: red;
+} */
+
+.card {
+  width: 300px;
+  background-color: #fff;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  border-radius: 5px;
+  padding: 16px;
+  margin: 16px;
+}
+
+.card h2 {
+  font-size: 24px;
+  margin-bottom: 8px;
+}
+
+.card p {
+  font-size: 16px;
+  margin-bottom: 8px;
+}
+
+.display-card {
+  display: none !important;
+}
+
+h1 {
+  font-size: 32px;
+  margin-bottom: 20px;
+}
+
+.cars-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.car-card {
+  width: 32%;
+  margin-bottom: 20px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-shadow: 0 0 5px #ccc;
+  cursor: pointer;
+}
+
+.car-card:hover {
+  box-shadow: 0 0 10px #ccc;
+}
+
+.car-card img {
+  max-width: 100%;
+  height: auto;
+}
+
+.car-card h2 {
+  font-size: 24px;
+  margin-top: 10px;
+  margin-bottom: 5px;
+}
+
+.car-card .year {
+  font-size: 18px;
+  margin-bottom: 10px;
+}
+
+.car-card .price {
+  font-size: 20px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.car-card .description {
+  font-size: 14px;
+  line-height: 1.4;
+  margin-bottom: 10px;
+  max-height: 70px;
+  overflow: hidden;
+}

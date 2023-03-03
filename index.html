@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="./css/style.css" />
+  </head>
+  <body>
+    <div>
+      <label for="filter-input">Wyszukaj po nazwie (modelu) samochodu:</label>
+      <input type="text" id="filter-input" />
+    </div>
+    <div id="cards-container"></div>
+
+    <div id="modal" class="modal">
+      <div class="modal-content">
+        <span class="close">&times;</span>
+        <div id="car-details"></div>
+        <form id="order-form">
+          <h3>Zamówienie:</h3>
+          <div>
+            <label for="customer-name">Imię i nazwisko:</label>
+            <input
+              type="text"
+              id="customer-name"
+              name="customerName"
+              required
+            />
+          </div>
+          <div>
+            <label for="customer-email">E-mail:</label>
+            <input
+              type="email"
+              id="customer-email"
+              name="customerEmail"
+              required
+            />
+          </div>
+          <div>
+            <label for="customer-phone">Telefon:</label>
+            <input
+              type="tel"
+              id="customer-phone"
+              name="customerPhone"
+              required
+            />
+          </div>
+          <div>
+            <label for="order-comments">Komentarz:</label>
+            <textarea id="order-comments" name="orderComments"></textarea>
+          </div>
+          <button type="submit">Zamów</button>
+        </form>
+        <div id="options">
+          <h3>Dodatkowe opcje:</h3>
+          <div id="options-inner"></div>
+        </div>
+        <div id="purchase">
+          <h3>Podsumowanie zamówienia:</h3>
+          <p id="purchase-price"></p>
+          <button id="purchase-button">Kup teraz</button>
+        </div>
+      </div>
+    </div>
+    <script type="module" src="js/script.js"></script>
+  </body>
+</html>
