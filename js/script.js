@@ -6,6 +6,8 @@ let cardsContainer = document.getElementById("cards-container");
 let filterInput = document.getElementById("filter-input");
 let carDetails = document.getElementById("car-details");
 let optionsInner = document.getElementById("options-inner");
+let modal = document.getElementById("modal");
+let closeModal = document.getElementById("close-modal");
 
 async function getCars() {
   try {
@@ -71,7 +73,6 @@ function renderOptionsCard(option) {
   optionCard.appendChild(optionPrice);
 
   optionsInner.appendChild(optionCard);
-  // console.log(optionCard);
 }
 
 function renderCard(car) {
@@ -113,12 +114,11 @@ function renderCard(car) {
 function filterCars() {
   let filterValue = filterInput.value.toLowerCase();
   let cards = document.getElementsByClassName("card");
-  // console.log(cards);
   for (let i = 0; i < cards.length; i++) {
     let name = cards[i].querySelector("h2").innerText.toLowerCase();
-    name.indexOf(filterValue) > -1 ?
-      cards[i].classList.remove("display-card") :
-      cards[i].classList.add("display-card");
+    name.indexOf(filterValue) > -1
+      ? cards[i].classList.remove("display-card")
+      : cards[i].classList.add("display-card");
   }
 }
 
@@ -134,8 +134,8 @@ function renderModal(carId) {
   carDetails.innerText = "";
 
   fetch(
-      `https://6400a0c863e89b0913b3565c.mockapi.io/api_js_kotsovskyi/cars/${carId}`
-    )
+    `https://6400a0c863e89b0913b3565c.mockapi.io/api_js_kotsovskyi/cars/${carId}`
+  )
     .then((response) => response.json())
     .then((car) => {
       sum += car.price;
@@ -160,36 +160,45 @@ function renderModal(carId) {
       carInfo.innerText = `${car.info}`;
       carDetails.appendChild(carInfo);
 
-      purchasePrice.innerText = `${car.price}`
-    })
+      purchasePrice.innerText = `${sum}`;
+
+      optionsInner.addEventListener("change", function (e) {
+        let optionId;
+        let optionPrice = 0;
+        if (e.target.tagName === "INPUT") {
+          optionId = e.target.closest(".option-card").getAttribute("option-id");
+          getOptions()
+            .then((options) => {
+              if (e.target.checked) {
+                sum += options[optionId - 1].price;
+                purchasePrice.innerText = `${sum} zł`;
+              } else {
+                sum = sum - options[optionId - 1].price;
+                purchasePrice.innerText = `${sum} zł`;
+              }
+            })
+            .catch((err) => {
+              console.error(err);
+            });
+          return optionPrice;
+        }
+      });
+    });
 }
 
 cardsContainer.addEventListener("click", function (e) {
   let carId;
   if (e.target.classList.contains("card") || e.target.closest(".card")) {
+    modal.classList.add("modal-open");
     carId = e.target.closest(".card").getAttribute("car-id");
     renderModal(carId);
   }
 });
 
-function getOptionId(e) {
-  let optionId
-  let optionPrice = 0
-  if (e.target.tagName === 'INPUT') {
-    optionId = e.target.closest(".option-card").getAttribute("option-id");   
-    getOptions().then(options => {
-      console.log(options[optionId-1].price);
-      optionPrice += options[optionId-1].price
-    }).catch(err => {
-      console.error(err);
-    });
-  return optionPrice
-  }
-}
-
-optionsInner.addEventListener('change', getOptionId)
-
-
 filterInput.addEventListener("input", filterCars);
+
+closeModal.addEventListener("click", function () {
+  modal.classList.remove("modal-open");
+});
 
 renderCars();

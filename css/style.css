@@ -1,4 +1,4 @@
-/* * {
+* {
   box-sizing: border-box;
 }
 
@@ -18,8 +18,9 @@
   overflow: auto;
   background-color: rgba(255, 2, 2, 0.836);
 }
+
 #modal-content {
-  background-color: white;
+  /* background-color: white; */
   margin: 15% auto;
   padding: 20px;
   border: 1px solid black;
@@ -33,7 +34,7 @@
 
 .car_card {
   background-color: red;
-} */
+}
 
 .card {
   width: 300px;

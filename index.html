@@ -16,7 +16,7 @@
 
     <div id="modal" class="modal">
       <div class="modal-content">
-        <span class="close">&times;</span>
+        <span id="close-modal" class="close">&times;</span>
         <div id="car-details"></div>
         <form id="order-form">
           <h3>Zamówienie:</h3>
@@ -47,10 +47,22 @@
               required
             />
           </div>
-          <div>
-            <label for="order-comments">Komentarz:</label>
-            <textarea id="order-comments" name="orderComments"></textarea>
-          </div>
+          <fieldset>
+            <legend>Wybierz sposób finansowania:</legend>
+            <div>
+              <input
+                type="radio"
+                id="cash"
+                name="finance"
+                value="cash"
+                checked
+              />
+              <label for="cash">Gotówka</label>
+
+              <input type="radio" id="leasing" name="finance" value="leasing" />
+              <label for="leasing">Leasing</label>
+            </div>
+          </fieldset>
           <button type="submit">Zamów</button>
         </form>
         <div id="options">
