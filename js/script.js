@@ -8,9 +8,15 @@ let carDetails = document.getElementById("car-details");
 let optionsInner = document.getElementById("options-inner");
 let modal = document.getElementById("modal");
 let closeModal = document.getElementById("close-modal");
+let buyBnt = document.getElementById("purchase-button");
+let buyModal = document.getElementById("buyModal");
+let changeDate = document.getElementById("shipDate");
+
 let sum = 0;
 
 let now = new Date();
+let today = now.toISOString().slice(0, 10);
+let changedUsersDate = "";
 
 async function getCars() {
   try {
@@ -130,6 +136,7 @@ function filterCars() {
 }
 
 function renderModal(carId) {
+  console.log(`render modal ${changedUsersDate}`);
   document.body.classList.add("modal");
   let carDetails = document.getElementById("car-details");
   let purchasePrice = document.getElementById("purchase-price");
@@ -172,9 +179,7 @@ function renderModal(carId) {
       carDetails.appendChild(carInfo);
 
       purchasePrice.innerText = `${sum} zł`;
-      let changeDate = document.getElementById("shipDate");
 
-      let today = now.toISOString().slice(0, 10);
       changeDate.value = today;
 
       let minTimeShip = new Date(now);
@@ -184,6 +189,15 @@ function renderModal(carId) {
       let maxTimeShip = new Date(now);
       maxTimeShip.setDate(now.getDate() + 15);
       changeDate.max = maxTimeShip.toISOString().slice(0, 10);
+
+      let buyCarInfo = document.createElement("p");
+      buyCarInfo.innerText = renderBuyModal(
+        car.brand,
+        car.model,
+        car.year,
+        changedUsersDate
+      );
+      buyModal.appendChild(buyCarInfo);
     });
 }
 
@@ -227,6 +241,19 @@ filterInput.addEventListener("input", filterCars);
 closeModal.addEventListener("click", function () {
   modal.classList.remove("modal-open");
   document.body.classList.remove("modal");
+});
+
+function renderBuyModal(carName, carModel, carYear, changedUsersDate) {
+  return `Twój samochód to: ${carName} ${carModel}, rocznik ${carYear}.
+  Przewidywana data dostawy to: ${changedUsersDate}`;
+}
+
+buyBnt.addEventListener("click", function () {
+  buyModal.classList.add("buy-modal_open");
+});
+
+changeDate.addEventListener("change", function () {
+  changedUsersDate = changeDate.value;
 });
 
 renderCars();
