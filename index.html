@@ -8,73 +8,109 @@
     <link rel="stylesheet" href="./css/style.css" />
   </head>
   <body>
-    <div>
-      <label for="filter-input">Wyszukaj po nazwie (modelu) samochodu:</label>
-      <input type="text" id="filter-input" />
-    </div>
-    <div id="cards-container"></div>
+    <div class="container">
+      <section class="main">
+        <div class="top">
+          <label for="filter-input"
+            >Wyszukaj po nazwie (modelu) samochodu:</label
+          >
+          <input
+            type="text"
+            id="filter-input"
+            placeholder="Wpisz markę/model samochodu"
+          />
+        </div>
+        <div id="cards-container"></div>
 
-    <div id="modal" class="modal">
-      <div class="modal-content">
-        <span id="close-modal" class="close">&times;</span>
-        <div id="car-details"></div>
-        <form id="order-form">
-          <h3>Zamówienie:</h3>
-          <div>
-            <label for="customer-name">Imię i nazwisko:</label>
-            <input
-              type="text"
-              id="customer-name"
-              name="customerName"
-              required
-            />
-          </div>
-          <div>
-            <label for="customer-email">E-mail:</label>
-            <input
-              type="email"
-              id="customer-email"
-              name="customerEmail"
-              required
-            />
-          </div>
-          <div>
-            <label for="customer-phone">Telefon:</label>
-            <input
-              type="tel"
-              id="customer-phone"
-              name="customerPhone"
-              required
-            />
-          </div>
-          <fieldset>
-            <legend>Wybierz sposób finansowania:</legend>
-            <div>
-              <input
-                type="radio"
-                id="cash"
-                name="finance"
-                value="cash"
-                checked
-              />
-              <label for="cash">Gotówka</label>
+        <div id="modal" class="modal">
+          <div class="container">
+            <div class="modal-content">
+              <span id="close-modal" class="close">&times;</span>
+              <div id="car-details"></div>
 
-              <input type="radio" id="leasing" name="finance" value="leasing" />
-              <label for="leasing">Leasing</label>
+              <div id="options">
+                <h3>Dodatkowe opcje:</h3>
+                <div id="options-inner"></div>
+              </div>
+              <form id="order-form">
+                <h3>Zamówienie:</h3>
+                <div class="order-form_inner">
+                  <div>
+                    <label for="customer-name">Imię i nazwisko:</label>
+                    <input
+                      type="text"
+                      id="customer-name"
+                      name="customerName"
+                      required
+                      placeholder="Podaj swoje imię i nazwisko"
+                    />
+                  </div>
+                  <div>
+                    <label for="customer-email">E-mail:</label>
+                    <input
+                      type="email"
+                      id="customer-email"
+                      name="customerEmail"
+                      required
+                      placeholder="Podaj swój adress e-mail"
+                    />
+                  </div>
+                  <div>
+                    <label for="customer-phone">Telefon:</label>
+                    <input
+                      type="tel"
+                      id="customer-phone"
+                      name="customerPhone"
+                      required
+                      placeholder="Podaj swój numer telefonu"
+                    />
+                  </div>
+                  <fieldset>
+                    <legend>Wybierz sposób finansowania:</legend>
+                    <div>
+                      <input
+                        type="radio"
+                        id="cash"
+                        name="finance"
+                        value="cash"
+                        checked
+                      />
+                      <label for="cash">Gotówka</label>
+
+                      <input
+                        type="radio"
+                        id="leasing"
+                        name="finance"
+                        value="leasing"
+                      />
+                      <label for="leasing">Leasing</label>
+                    </div>
+                  </fieldset>
+                  <div class="ship-date">
+                    <label for="shipDate"
+                      >Wybierz preferowaną datę dostawy:</label
+                    >
+
+                    <input
+                      type="date"
+                      id="shipDate"
+                      name="shipping"
+                      value=""
+                      min=""
+                      max=""
+                    />
+                  </div>
+                </div>
+              </form>
+              <div id="purchase">
+                <h3>Podsumowanie zamówienia:</h3>
+                <p id="purchase-price"></p>
+                <button id="purchase-button">Kup teraz</button>
+              </div>
             </div>
-          </fieldset>
-          <button type="submit">Zamów</button>
-        </form>
-        <div id="options">
-          <h3>Dodatkowe opcje:</h3>
-          <div id="options-inner"></div>
+          </div>
         </div>
-        <div id="purchase">
-          <h3>Podsumowanie zamówienia:</h3>
-          <p id="purchase-price"></p>
-          <button id="purchase-button">Kup teraz</button>
-        </div>
-      </div>
+      </section>
     </div>
     <script type="module" src="js/script.js"></script>
   </body>

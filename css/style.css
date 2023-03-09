@@ -1,3 +1,4 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap");
 * {
   box-sizing: border-box;
 }
@@ -5,6 +6,92 @@
 *::after,
 *::before {
   box-sizing: inherit;
+}
+
+body {
+  font-family: "Roboto", sans-serif;
+}
+
+img {
+  object-position: center;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0px 15px;
+}
+.display-card {
+  display: none !important;
+}
+
+.modal-open {
+  display: block !important;
+}
+
+body.modal {
+  overflow: hidden;
+}
+
+.top {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 30px;
+}
+
+.top label {
+  font-size: 24px;
+  font-weight: 500;
+  margin-bottom: 20px;
+}
+
+.top input {
+  width: 30%;
+  /* height: 30px; */
+  padding: 10px;
+}
+
+#cards-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 15px;
+}
+
+.card,
+.option-card {
+  width: 49%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-shadow: 0 0 5px #ccc;
+  cursor: pointer;
+}
+
+.card-image {
+  width: 100%;
+  height: 250px;
+  overflow: hidden;
+}
+.card-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: all 0.5s ease-in-out;
+}
+
+.card-image img:hover,
+.modal_car-image img:hover {
+  transform: scale(1.1);
+}
+
+.card h2 {
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+
+.card p {
+  margin: 0px 0px 10px 0px;
 }
 
 #modal {
@@ -16,7 +103,7 @@
   width: 100%;
   height: 100%;
   overflow: auto;
-  background-color: rgba(255, 2, 2, 0.836);
+  background-color: #fefefe;
 }
 
 #modal-content {
@@ -28,89 +115,177 @@
   max-width: 600px;
 }
 
-.modal-open {
-  display: block !important;
-}
-
-.car_card {
-  background-color: red;
-}
-
-.card {
-  width: 300px;
-  background-color: #fff;
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-  border-radius: 5px;
-  padding: 16px;
-  margin: 16px;
-}
-
-.card h2 {
-  font-size: 24px;
-  margin-bottom: 8px;
-}
-
-.card p {
-  font-size: 16px;
-  margin-bottom: 8px;
-}
-
-.display-card {
-  display: none !important;
-}
-
-h1 {
-  font-size: 32px;
-  margin-bottom: 20px;
-}
-
-.cars-container {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  margin-bottom: 20px;
-}
-
-.car-card {
-  width: 32%;
-  margin-bottom: 20px;
-  padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  box-shadow: 0 0 5px #ccc;
+#close-modal {
+  font-size: 30px;
   cursor: pointer;
+  padding: 5px;
+  float: right;
 }
-
-.car-card:hover {
-  box-shadow: 0 0 10px #ccc;
-}
-
-.car-card img {
-  max-width: 100%;
+.car-images {
+  width: 100%;
   height: auto;
 }
 
-.car-card h2 {
-  font-size: 24px;
-  margin-top: 10px;
+.car-images img {
+  width: 50%;
+  height: auto;
+}
+
+.modal_car-images {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.modal_car-image {
+  width: 49%;
+  height: 400px;
+  overflow: hidden;
+}
+
+.modal_car-image img {
+  width: 100%;
+  max-width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: all 0.5s ease-in-out;
+}
+
+#options-inner {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+.option-card {
+  cursor: default;
+}
+
+.option-card input {
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+}
+
+.order-form_inner {
+  display: flex;
+  flex-direction: column;
+  width: 70%;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.order-form div {
+  width: 100%;
+}
+.order-form_inner div {
   margin-bottom: 5px;
 }
 
-.car-card .year {
-  font-size: 18px;
-  margin-bottom: 10px;
+.order-form_inner div label {
+  display: block;
+  margin-bottom: 5px;
 }
 
-.car-card .price {
-  font-size: 20px;
-  font-weight: bold;
-  margin-bottom: 10px;
+.order-form_inner div input {
+  width: 40%;
+  padding: 10px;
 }
 
-.car-card .description {
-  font-size: 14px;
-  line-height: 1.4;
-  margin-bottom: 10px;
-  max-height: 70px;
-  overflow: hidden;
+.order-form_inner fieldset {
+  width: 50%;
+  margin: 20px auto 20px;
+}
+
+#purchase {
+  text-align: right;
+  margin-bottom: 40px;
+}
+
+#purchase button {
+  padding: 10px;
+  cursor: pointer;
+}
+
+@media only screen and (max-width: 1100px) {
+  .order-form_inner {
+    width: 100%;
+  }
+}
+@media only screen and (max-width: 814px) {
+  .top label {
+    text-align: center;
+  }
+  .top input {
+    width: 50%;
+    margin: 0 auto;
+    text-align: center;
+  }
+  .card {
+    width: 100%;
+  }
+  .card-image {
+    height: 300px;
+  }
+  .modal_car-image {
+    width: 100%;
+    height: 350px;
+  }
+  .order-form_inner div input {
+    width: 50%;
+  }
+}
+
+@media only screen and (max-width: 650px) {
+  .modal_car-image {
+    height: 250px;
+  }
+  .card,
+  .option-card {
+    width: 80%;
+    margin: 0 auto;
+  }
+  .order-form_inner div input {
+    width: 80%;
+  }
+  fieldset legend {
+    font-size: 14px;
+  }
+}
+@media only screen and (max-width: 525px) {
+  .top label {
+    font-size: 18px;
+    margin-bottom: 10px;
+  }
+  .top input {
+    width: 100%;
+  }
+
+  .card {
+    padding: 5px;
+  }
+  .card-image {
+    height: 150px;
+  }
+  .card h2 {
+    font-size: 16px;
+    margin-bottom: 5px;
+    margin-top: 5px;
+  }
+  .card p {
+    margin: 0px 0px 5px 0px;
+    font-size: 14px;
+  }
+  .modal_car-image {
+    height: 150px;
+  }
+  .card,
+  .option-card {
+    width: 100%;
+  }
+  .order-form_inner fieldset {
+    width: 100%;
+  }
 }

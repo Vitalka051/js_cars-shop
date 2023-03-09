@@ -8,8 +8,9 @@ let carDetails = document.getElementById("car-details");
 let optionsInner = document.getElementById("options-inner");
 let modal = document.getElementById("modal");
 let closeModal = document.getElementById("close-modal");
-
 let sum = 0;
+
+let now = new Date();
 
 async function getCars() {
   try {
@@ -82,9 +83,13 @@ function renderCard(car) {
   card.classList.add("card");
   card.setAttribute("car-id", `${car.id}`);
 
+  let cardImage = document.createElement("div");
+  cardImage.classList.add("card-image");
+  card.appendChild(cardImage);
+
   let image = document.createElement("img");
   image.src = `${car.image[0]}`;
-  card.appendChild(image);
+  cardImage.appendChild(image);
 
   let name = document.createElement("h2");
   name.innerText = `${car.brand} ${car.model}`;
@@ -125,6 +130,7 @@ function filterCars() {
 }
 
 function renderModal(carId) {
+  document.body.classList.add("modal");
   let carDetails = document.getElementById("car-details");
   let purchasePrice = document.getElementById("purchase-price");
 
@@ -142,10 +148,14 @@ function renderModal(carId) {
       sum = car.price;
 
       let imageDiv = document.createElement("div");
+      imageDiv.classList.add("modal_car-images");
       for (let image of car.image) {
+        let modalCarImage = document.createElement("div");
+        modalCarImage.classList.add("modal_car-image");
         let carImage = document.createElement("img");
         carImage.src = `${image}`;
-        imageDiv.appendChild(carImage);
+        modalCarImage.appendChild(carImage);
+        imageDiv.appendChild(modalCarImage);
       }
       carDetails.appendChild(imageDiv);
 
@@ -161,7 +171,19 @@ function renderModal(carId) {
       carInfo.innerText = `${car.info}`;
       carDetails.appendChild(carInfo);
 
-      purchasePrice.innerText = `${sum}`;
+      purchasePrice.innerText = `${sum} zł`;
+      let changeDate = document.getElementById("shipDate");
+
+      let today = now.toISOString().slice(0, 10);
+      changeDate.value = today;
+
+      let minTimeShip = new Date(now);
+      minTimeShip.setDate(now.getDate() + 3);
+      changeDate.min = minTimeShip.toISOString().slice(0, 10);
+
+      let maxTimeShip = new Date(now);
+      maxTimeShip.setDate(now.getDate() + 15);
+      changeDate.max = maxTimeShip.toISOString().slice(0, 10);
     });
 }
 
@@ -204,6 +226,7 @@ filterInput.addEventListener("input", filterCars);
 
 closeModal.addEventListener("click", function () {
   modal.classList.remove("modal-open");
+  document.body.classList.remove("modal");
 });
 
 renderCars();
