@@ -136,7 +136,6 @@ function filterCars() {
 }
 
 function renderModal(carId) {
-  console.log(`render modal ${changedUsersDate}`);
   document.body.classList.add("modal");
   let carDetails = document.getElementById("car-details");
   let purchasePrice = document.getElementById("purchase-price");
@@ -167,7 +166,8 @@ function renderModal(carId) {
       carDetails.appendChild(imageDiv);
 
       let carTitle = document.createElement("h2");
-      carTitle.innerText = `${car.brand}, ${car.model}`;
+      carTitle.id = "carTitle";
+      carTitle.innerText = `${car.brand} ${car.model}`;
       carDetails.appendChild(carTitle);
 
       let carParams = document.createElement("p");
@@ -189,15 +189,6 @@ function renderModal(carId) {
       let maxTimeShip = new Date(now);
       maxTimeShip.setDate(now.getDate() + 15);
       changeDate.max = maxTimeShip.toISOString().slice(0, 10);
-
-      let buyCarInfo = document.createElement("p");
-      buyCarInfo.innerText = renderBuyModal(
-        car.brand,
-        car.model,
-        car.year,
-        changedUsersDate
-      );
-      buyModal.appendChild(buyCarInfo);
     });
 }
 
@@ -243,17 +234,82 @@ closeModal.addEventListener("click", function () {
   document.body.classList.remove("modal");
 });
 
-function renderBuyModal(carName, carModel, carYear, changedUsersDate) {
-  return `Twój samochód to: ${carName} ${carModel}, rocznik ${carYear}.
-  Przewidywana data dostawy to: ${changedUsersDate}`;
+let closeBuyModal = document.getElementById("close-buy_modal");
+
+closeBuyModal.addEventListener("click", function () {
+  buyModal.classList.remove("buy-modal_open");
+});
+
+function renderBuyModal(buyedCarName, shippedDate) {
+  return `Twój samochód to: ${buyedCarName}.
+  Przewidywana data dostawy to: ${shippedDate}`;
 }
 
 buyBnt.addEventListener("click", function () {
-  buyModal.classList.add("buy-modal_open");
+  form.onsubmit();
 });
+
+function generateBuyModal() {
+  let buyModalInner = document.getElementById("buy-modal_inner");
+  let buyCarInfo = document.createElement("p");
+  let buyedCar = document.getElementById("carTitle").innerText;
+  buyModalInner.innerText = "";
+  buyModal.classList.add("buy-modal_open");
+  console.log(buyedCar);
+  buyCarInfo.innerText = renderBuyModal(buyedCar, changedUsersDate);
+  buyModalInner.appendChild(buyCarInfo);
+}
 
 changeDate.addEventListener("change", function () {
   changedUsersDate = changeDate.value;
 });
 
 renderCars();
+
+let form = document.getElementById("order-form");
+let nameInput = document.getElementById("customer-name");
+let emailInput = document.getElementById("customer-email");
+let phoneInput = document.getElementById("customer-phone");
+let shipDateInput = document.getElementById("shipDate");
+
+form.addEventListener("submit", (event) => {
+  let errors = [];
+
+  if (nameInput.value === "") {
+    errors.push("Proszę podać imię i nazwisko.");
+  }
+
+  if (emailInput.value === "") {
+    errors.push("Proszę podać adres e-mail.");
+  } else if (!validateEmail(emailInput.value)) {
+    errors.push("Proszę podać prawidłowy adres e-mail.");
+  }
+
+  if (phoneInput.value === "") {
+    errors.push("Proszę podać numer telefonu.");
+  } else if (!validatePhone(phoneInput.value)) {
+    errors.push("Proszę podać prawidłowy numer telefonu.");
+  }
+
+  if (shipDateInput.value === "") {
+    errors.push("Proszę wybrać datę dostawy.");
+  }
+
+  if (errors.length > 0) {
+    event.preventDefault();
+    alert(errors.join("\n"));
+  } else {
+    event.preventDefault();
+    generateBuyModal();
+  }
+});
+
+function validateEmail(email) {
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  return emailRegex.test(email);
+}
+
+function validatePhone(phone) {
+  const phoneRegex = /^\d{9}$/;
+  return phoneRegex.test(phone);
+}

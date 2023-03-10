@@ -33,6 +33,10 @@ img {
   display: block !important;
 }
 
+.buy-modal_open {
+  display: block !important;
+}
+
 body.modal {
   overflow: hidden;
 }
@@ -223,6 +227,26 @@ body.modal {
 #purchase button {
   padding: 10px;
   cursor: pointer;
+}
+
+.close-buy {
+  padding: 10px;
+  font-size: 40px;
+  float: right;
+  cursor: pointer;
+}
+
+.buy-modal {
+  text-align: center;
+}
+
+.buy-modal h2 {
+  margin-top: 20vh;
+  font-size: 36px;
+}
+
+.buy-modal p {
+  font-size: 24px;
 }
 
 @media only screen and (max-width: 1100px) {
