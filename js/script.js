@@ -313,3 +313,53 @@ function validatePhone(phone) {
   const phoneRegex = /^\d{9}$/;
   return phoneRegex.test(phone);
 }
+
+// local-storage
+
+// const inputs = form.querySelectorAll("input");
+// const submitButton = form.querySelector('button[type="submit"]');
+
+// // Funkcja zapisująca dane do local storage
+// function saveFormData() {
+//   inputs.forEach((input) => {
+//     localStorage.setItem(input.name, input.value);
+//   });
+// }
+
+// // Funkcja pobierająca dane z local storage i wprowadzająca je do formularza
+// function loadFormData() {
+//   inputs.forEach((input) => {
+//     input.value = localStorage.getItem(input.name) || "";
+//   });
+// }
+
+// // Funkcja usuwająca dane z local storage po pomyślnym wysłaniu formularza
+// function clearFormData() {
+//   inputs.forEach((input) => {
+//     localStorage.removeItem(input.name);
+//     input.value = "";
+//   });
+// }
+
+// // Wywołanie funkcji pobierającej dane z local storage przy ładowaniu strony
+// loadFormData();
+
+// form.addEventListener("submit", (e) => {
+//   // Zatrzymanie domyślnej akcji formularza
+//   e.preventDefault();
+
+//   // Walidacja formularza
+//   if (form.checkValidity()) {
+//     // Zapisanie danych do local storage
+//     saveFormData();
+
+//     // Wywołanie funkcji usuwającej dane z formularza
+//     clearFormData();
+
+//     // Wyświetlenie modala po pomyślnym wysłaniu formularza
+//     showModal();
+//   } else {
+//     // W przypadku błędów walidacji wyświetlenie komunikatu
+//     alert("Formularz zawiera błędy. Sprawdź poprawność wprowadzonych danych.");
+//   }
+// });
