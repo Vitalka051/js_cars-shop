@@ -2,10 +2,10 @@ let apiUrl =
   "https://6400a0c863e89b0913b3565c.mockapi.io/api_js_kotsovskyi/cars";
 let optionsUrl =
   "https://6400a0c863e89b0913b3565c.mockapi.io/api_js_kotsovskyi/options";
-let cardsContainer = document.getElementById("cards-container");
-let filterInput = document.getElementById("filter-input");
-let carDetails = document.getElementById("car-details");
-let optionsInner = document.getElementById("options-inner");
+let $cardsContainer = document.getElementById("cards-container");
+let $filterInput = document.getElementById("filter-input");
+let $carDetails = document.getElementById("car-details");
+let $optionsInner = document.getElementById("options-inner");
 let modal = document.getElementById("modal");
 let closeModal = document.getElementById("close-modal");
 let buyBnt = document.getElementById("purchase-button");
@@ -81,7 +81,7 @@ function renderOptionsCard(option) {
   optionPrice.innerHTML = `<span>${option.price}</span> zł`;
   optionCard.appendChild(optionPrice);
 
-  optionsInner.appendChild(optionCard);
+  $optionsInner.appendChild(optionCard);
 }
 
 function renderCard(car) {
@@ -121,11 +121,11 @@ function renderCard(car) {
   info.innerText = `Opis: ${car.info.slice(0, 70)}...`;
   card.appendChild(info);
 
-  cardsContainer.appendChild(card);
+  $cardsContainer.appendChild(card);
 }
 
 function filterCars() {
-  let filterValue = filterInput.value.toLowerCase();
+  let filterValue = $filterInput.value.toLowerCase();
   let cards = document.getElementsByClassName("card");
   for (let i = 0; i < cards.length; i++) {
     let name = cards[i].querySelector("h2").innerText.toLowerCase();
@@ -137,14 +137,14 @@ function filterCars() {
 
 function renderModal(carId) {
   document.body.classList.add("modal");
-  let carDetails = document.getElementById("car-details");
+  let $carDetails = document.getElementById("car-details");
   let purchasePrice = document.getElementById("purchase-price");
 
-  optionsInner.innerHTML = "";
+  $optionsInner.innerHTML = "";
 
   renderOptions();
 
-  carDetails.innerText = "";
+  $carDetails.innerText = "";
 
   fetch(
     `https://6400a0c863e89b0913b3565c.mockapi.io/api_js_kotsovskyi/cars/${carId}`
@@ -163,20 +163,20 @@ function renderModal(carId) {
         modalCarImage.appendChild(carImage);
         imageDiv.appendChild(modalCarImage);
       }
-      carDetails.appendChild(imageDiv);
+      $carDetails.appendChild(imageDiv);
 
       let carTitle = document.createElement("h2");
       carTitle.id = "carTitle";
       carTitle.innerText = `${car.brand} ${car.model}`;
-      carDetails.appendChild(carTitle);
+      $carDetails.appendChild(carTitle);
 
       let carParams = document.createElement("p");
       carParams.innerText = `Rok: ${car.year}, moc silnika: ${car.power} KM, przebieg: ${car.kilometers} km`;
-      carDetails.appendChild(carParams);
+      $carDetails.appendChild(carParams);
 
       let carInfo = document.createElement("p");
       carInfo.innerText = `${car.info}`;
-      carDetails.appendChild(carInfo);
+      $carDetails.appendChild(carInfo);
 
       purchasePrice.innerText = `${sum} zł`;
 
@@ -216,9 +216,9 @@ function checkOption(e) {
   }
 }
 
-optionsInner.addEventListener("change", checkOption);
+$optionsInner.addEventListener("change", checkOption);
 
-cardsContainer.addEventListener("click", function (e) {
+$cardsContainer.addEventListener("click", function (e) {
   let carId;
   if (e.target.classList.contains("card") || e.target.closest(".card")) {
     modal.classList.add("modal-open");
@@ -227,7 +227,7 @@ cardsContainer.addEventListener("click", function (e) {
   }
 });
 
-filterInput.addEventListener("input", filterCars);
+$filterInput.addEventListener("input", filterCars);
 
 closeModal.addEventListener("click", function () {
   modal.classList.remove("modal-open");
@@ -255,7 +255,6 @@ function generateBuyModal() {
   let buyedCar = document.getElementById("carTitle").innerText;
   buyModalInner.innerText = "";
   buyModal.classList.add("buy-modal_open");
-  console.log(buyedCar);
   buyCarInfo.innerText = renderBuyModal(buyedCar, changedUsersDate);
   buyModalInner.appendChild(buyCarInfo);
 }
@@ -313,53 +312,3 @@ function validatePhone(phone) {
   const phoneRegex = /^\d{9}$/;
   return phoneRegex.test(phone);
 }
-
-// local-storage
-
-// const inputs = form.querySelectorAll("input");
-// const submitButton = form.querySelector('button[type="submit"]');
-
-// // Funkcja zapisująca dane do local storage
-// function saveFormData() {
-//   inputs.forEach((input) => {
-//     localStorage.setItem(input.name, input.value);
-//   });
-// }
-
-// // Funkcja pobierająca dane z local storage i wprowadzająca je do formularza
-// function loadFormData() {
-//   inputs.forEach((input) => {
-//     input.value = localStorage.getItem(input.name) || "";
-//   });
-// }
-
-// // Funkcja usuwająca dane z local storage po pomyślnym wysłaniu formularza
-// function clearFormData() {
-//   inputs.forEach((input) => {
-//     localStorage.removeItem(input.name);
-//     input.value = "";
-//   });
-// }
-
-// // Wywołanie funkcji pobierającej dane z local storage przy ładowaniu strony
-// loadFormData();
-
-// form.addEventListener("submit", (e) => {
-//   // Zatrzymanie domyślnej akcji formularza
-//   e.preventDefault();
-
-//   // Walidacja formularza
-//   if (form.checkValidity()) {
-//     // Zapisanie danych do local storage
-//     saveFormData();
-
-//     // Wywołanie funkcji usuwającej dane z formularza
-//     clearFormData();
-
-//     // Wyświetlenie modala po pomyślnym wysłaniu formularza
-//     showModal();
-//   } else {
-//     // W przypadku błędów walidacji wyświetlenie komunikatu
-//     alert("Formularz zawiera błędy. Sprawdź poprawność wprowadzonych danych.");
-//   }
-// });
