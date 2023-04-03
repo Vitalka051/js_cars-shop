@@ -32,83 +32,72 @@
                 <h3>Dodatkowe opcje:</h3>
                 <div id="options-inner"></div>
               </div>
+              <div id="purchase">
+                <h3>Podsumowanie zamówienia:</h3>
+                <p id="purchase-price"></p>
+              </div>
+              <h3>Zamówienie:</h3>
+
               <form id="order-form">
-                <h3>Zamówienie:</h3>
-                <div class="order-form_inner">
-                  <div>
-                    <label for="customer-name">Imię i nazwisko:</label>
-                    <input
-                      type="text"
-                      id="customer-name"
-                      name="customerName"
-                      required
-                      placeholder="Podaj swoje imię i nazwisko"
-                    />
-                  </div>
-                  <div>
-                    <label for="customer-email">E-mail:</label>
-                    <input
-                      type="email"
-                      id="customer-email"
-                      name="customerEmail"
-                      required
-                      placeholder="Podaj swój adress e-mail"
-                    />
-                  </div>
-                  <div>
-                    <label for="customer-phone">Telefon:</label>
-                    <input
-                      type="tel"
-                      id="customer-phone"
-                      name="customerPhone"
-                      required
-                      placeholder="Podaj swój numer telefonu"
-                    />
-                  </div>
-                  <fieldset>
-                    <legend>Wybierz sposób finansowania:</legend>
-                    <div>
-                      <input
-                        type="radio"
-                        id="cash"
-                        name="finance"
-                        value="cash"
-                        checked
-                      />
-                      <label for="cash">Gotówka</label>
+                <label for="firstName">Imię:</label>
+                <input
+                  type="text"
+                  id="firstName"
+                  name="firstName"
+                  required
+                /><br />
 
-                      <input
-                        type="radio"
-                        id="leasing"
-                        name="finance"
-                        value="leasing"
-                      />
-                      <label for="leasing">Leasing</label>
-                    </div>
-                  </fieldset>
-                  <div class="ship-date">
-                    <label for="shipDate"
-                      >Wybierz preferowaną datę dostawy:</label
-                    >
+                <label for="lastName">Nazwisko:</label>
+                <input
+                  type="text"
+                  id="lastName"
+                  name="lastName"
+                  required
+                /><br />
 
-                    <input
-                      type="date"
-                      id="shipDate"
-                      name="shipping"
-                      value=""
-                      min=""
-                      max=""
-                    />
-                  </div>
-                </div>
-                <div id="purchase">
-                  <h3>Podsumowanie zamówienia:</h3>
-                  <p id="purchase-price"></p>
-                  <button id="purchase-button" type="submit" form="order-form">
-                    Kup teraz
-                  </button>
-                </div>
+                <label for="phone">Telefon:</label>
+                <input
+                  type="tel"
+                  id="phone"
+                  name="phone"
+                  pattern="[0-9]{9}"
+                  required
+                /><br />
+
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" required /><br />
+
+                <label for="deliveryDate">Data dostawy:</label>
+                <input
+                  type="date"
+                  id="deliveryDate"
+                  name="deliveryDate"
+                  min=""
+                  max=""
+                  required
+                /><br />
+
+                <label for="paymentMethod">Metoda płatności:</label><br />
+                <input
+                  type="radio"
+                  id="cash"
+                  name="paymentMethod"
+                  value="Gotówka"
+                  required
+                />
+                <label for="cash">Gotówka</label><br />
+                <input
+                  type="radio"
+                  id="leasing"
+                  name="paymentMethod"
+                  value="Leasing"
+                  required
+                />
+                <label for="leasing">Leasing</label><br />
+
+                <input id="form-btn" type="submit" value="Wyślij" />
               </form>
+              <!-- </form> -->
             </div>
           </div>
         </div>
