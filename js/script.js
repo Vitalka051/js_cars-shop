@@ -196,7 +196,7 @@ window.onload = function () {
 
         changedCar = [];
         changedCar.push(car.brand, car.model);
-        console.log(changedCar);
+        loadFormFromLocalStorage();
       });
   }
 
@@ -254,21 +254,10 @@ window.onload = function () {
 
   form.addEventListener("submit", (event) => {
     event.preventDefault();
-
     let firstName = document.querySelector("#firstName").value;
     let lastName = document.querySelector("#lastName").value;
-    let phone = document.querySelector("#phone").value;
-    let email = document.querySelector("#email").value;
     let deliveryDate = document.querySelector("#deliveryDate").value;
-    let paymentMethod = document.querySelector(
-      'input[name="paymentMethod"]:checked'
-    ).value;
-
     changedCar.push(firstName, lastName, deliveryDate);
-    console.log(
-      `Formularz został poprawnie wypełniony i wysłany.\nImię: ${firstName}\nNazwisko: ${lastName}\nTelefon: ${phone}\nEmail: ${email}\nData dostawy: ${deliveryDate}\nMetoda płatności: ${paymentMethod}`
-    );
-    console.log(changedCar);
     form.reset();
     renderBuyModal(changedCar);
   });
@@ -281,8 +270,47 @@ window.onload = function () {
     purchaseInfo.innerText = `Dane dotyczące zamówienia:\n ${aboutPurchase[0]} ${aboutPurchase[1]},\n Klient: ${aboutPurchase[2]} ${aboutPurchase[3]},\n Data dostawy: ${aboutPurchase[4]}`;
     buyModalInner.appendChild(purchaseInfo);
   }
+
   document.getElementById("close-buy_modal").onclick = () => {
     buyModal.classList.remove("buy-modal_open");
     document.body.classList.remove("modal");
   };
+
+  function saveFormToLocalStorage() {
+    let firstName = document.querySelector("#firstName").value;
+    let lastName = document.querySelector("#lastName").value;
+    let phone = document.querySelector("#phone").value;
+    let email = document.querySelector("#email").value;
+    let deliveryDate = document.querySelector("#deliveryDate").value;
+    let paymentMethod = document.querySelector(
+      'input[name="paymentMethod"]:checked'
+    ).value;
+
+    let formData = {
+      firstName,
+      lastName,
+      phone,
+      email,
+      deliveryDate,
+      paymentMethod,
+    };
+
+    localStorage.setItem("formData", JSON.stringify(formData));
+  }
+
+  function loadFormFromLocalStorage() {
+    let formData = localStorage.getItem("formData");
+    if (formData) {
+      let { firstName, lastName, phone, email, deliveryDate, paymentMethod } =
+        JSON.parse(formData);
+      document.querySelector("#firstName").value = firstName;
+      document.querySelector("#lastName").value = lastName;
+      document.querySelector("#phone").value = phone;
+      document.querySelector("#email").value = email;
+      document.querySelector("#deliveryDate").value = deliveryDate;
+      document.querySelector(`input[value="${paymentMethod}"]`).checked = true;
+    }
+  }
+
+  form.addEventListener("input", saveFormToLocalStorage);
 };
