@@ -10,6 +10,8 @@ window.onload = function () {
   let closeModal = document.getElementById("close-modal");
   let buyModal = document.getElementById("buyModal");
   let changeDate = document.getElementById("deliveryDate");
+  let form = document.querySelector("#order-form");
+  let buyModalInner = document.getElementById("buy-modal_inner");
 
   let sum = 0;
 
@@ -249,25 +251,38 @@ window.onload = function () {
   changeDate.addEventListener("change", function () {
     changedUsersDate = changeDate.value;
   });
+
+  form.addEventListener("submit", (event) => {
+    event.preventDefault();
+
+    let firstName = document.querySelector("#firstName").value;
+    let lastName = document.querySelector("#lastName").value;
+    let phone = document.querySelector("#phone").value;
+    let email = document.querySelector("#email").value;
+    let deliveryDate = document.querySelector("#deliveryDate").value;
+    let paymentMethod = document.querySelector(
+      'input[name="paymentMethod"]:checked'
+    ).value;
+
+    changedCar.push(firstName, lastName, deliveryDate);
+    console.log(
+      `Formularz został poprawnie wypełniony i wysłany.\nImię: ${firstName}\nNazwisko: ${lastName}\nTelefon: ${phone}\nEmail: ${email}\nData dostawy: ${deliveryDate}\nMetoda płatności: ${paymentMethod}`
+    );
+    console.log(changedCar);
+    form.reset();
+    renderBuyModal(changedCar);
+  });
+
+  function renderBuyModal(aboutPurchase) {
+    modal.classList.remove("modal-open");
+    buyModal.classList.add("buy-modal_open");
+    buyModalInner.innerText = "";
+    let purchaseInfo = document.createElement("p");
+    purchaseInfo.innerText = `Dane dotyczące zamówienia:\n ${aboutPurchase[0]} ${aboutPurchase[1]},\n Klient: ${aboutPurchase[2]} ${aboutPurchase[3]},\n Data dostawy: ${aboutPurchase[4]}`;
+    buyModalInner.appendChild(purchaseInfo);
+  }
+  document.getElementById("close-buy_modal").onclick = () => {
+    buyModal.classList.remove("buy-modal_open");
+    document.body.classList.remove("modal");
+  };
 };
-
-let form = document.querySelector("#order-form"); // odwołanie do formularza
-form.addEventListener("submit", (event) => {
-  event.preventDefault(); // zablokowanie domyślnej akcji przeglądarki
-
-  // pobranie wartości z pól formularza
-  let firstName = document.querySelector("#firstName").value;
-  let lastName = document.querySelector("#lastName").value;
-  let phone = document.querySelector("#phone").value;
-  let email = document.querySelector("#email").value;
-  let deliveryDate = document.querySelector("#deliveryDate").value;
-  let paymentMethod = document.querySelector(
-    'input[name="paymentMethod"]:checked'
-  ).value;
-
-  // wyświetlenie informacji w konsoli
-  console.log(
-    `Formularz został poprawnie wypełniony i wysłany.\nImię: ${firstName}\nNazwisko: ${lastName}\nTelefon: ${phone}\nEmail: ${email}\nData dostawy: ${deliveryDate}\nMetoda płatności: ${paymentMethod}`
-  );
-  form.reset();
-});
